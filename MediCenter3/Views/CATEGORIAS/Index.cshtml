@@ -1,0 +1,37 @@
+﻿@model IEnumerable<MediCenter3.Models.CATEGORIAS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    @Html.ActionLink("Nueva categoria", "Create", "CATEGORIAS", new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CATEGORIA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CATEGORIA)
+        </td>
+        <td>
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit","CATEGORIAS", new { id = item.ID_CATEGORIA })'">Editar</button>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_CATEGORIA }) |*@
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Details","CATEGORIAS", new {  id = item.ID_CATEGORIA })'">Detalles</button>
+            @*@Html.ActionLink("Details", "Details", new { id = item.ID_CATEGORIA }) |*@
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Delete","CATEGORIAS", new { id = item.ID_CATEGORIA })'">Borrar</button>
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_CATEGORIA })*@
+        </td>
+    </tr>
+}
+
+</table>

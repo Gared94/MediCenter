@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MediCenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CATEGORIAS">
+    <Key>
+      <PropertyRef Name="ID_CATEGORIA" />
+    </Key>
+    <Property Name="ID_CATEGORIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CATEGORIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_PRODUCTO_REFERENCE_CATEGORI" FromRole="CATEGORIAS" ToRole="PRODUCTOS" />
+  </EntityType>
+  <EntityType Name="CLIENTES">
+    <Key>
+      <PropertyRef Name="ID_CLIENTES" />
+    </Key>
+    <Property Name="ID_CLIENTES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ENC_FACTURAS" Relationship="Self.FK_ENC_FACT_REFERENCE_CLIENTES" FromRole="CLIENTES" ToRole="ENC_FACTURAS" />
+  </EntityType>
+  <EntityType Name="DETALLES">
+    <Key>
+      <PropertyRef Name="ID_DETALLE" />
+    </Key>
+    <Property Name="ID_DETALLE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_ENCABEZADO" Type="Int32" />
+    <Property Name="ID_PRODUCTO" Type="Int32" />
+    <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+    <Property Name="PRECIO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="IMPUESTO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="TOTAL" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="ENC_FACTURAS" Relationship="Self.FK_DETALLES_REFERENCE_ENC_FACT" FromRole="DETALLES" ToRole="ENC_FACTURAS" />
+    <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_DETALLES_REFERENCE_PRODUCTO" FromRole="DETALLES" ToRole="PRODUCTOS" />
+  </EntityType>
+  <EntityType Name="EMPLEADOS">
+    <Key>
+      <PropertyRef Name="ID_EMPLEADO" />
+    </Key>
+    <Property Name="ID_EMPLEADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_SUCURSAL" Type="Int32" />
+    <Property Name="NOMBRE" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DUI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="SUCURSALES" Relationship="Self.FK_EMPLEADO_REFERENCE_SUCURSAL" FromRole="EMPLEADOS" ToRole="SUCURSALES" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.FK_USUARIOS_REFERENCE_EMPLEADO" FromRole="EMPLEADOS" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="ENC_FACTURAS">
+    <Key>
+      <PropertyRef Name="ID_ENCABEZADO" />
+    </Key>
+    <Property Name="ID_ENCABEZADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CLIENTES" Type="Int32" />
+    <Property Name="FACTURA" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="CLIENTES" Relationship="Self.FK_ENC_FACT_REFERENCE_CLIENTES" FromRole="ENC_FACTURAS" ToRole="CLIENTES" />
+    <NavigationProperty Name="DETALLES" Relationship="Self.FK_DETALLES_REFERENCE_ENC_FACT" FromRole="ENC_FACTURAS" ToRole="DETALLES" />
+  </EntityType>
+  <EntityType Name="PRODUCTOS">
+    <Key>
+      <PropertyRef Name="ID_PRODUCTO" />
+    </Key>
+    <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CATEGORIA" Type="Int32" />
+    <Property Name="ID_PROVEEDOR" Type="Int32" />
+    <Property Name="ID_SUCURSAL" Type="Int32" />
+    <Property Name="NOMBRE" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PRECIO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="EXISTENCIA" Type="Int32" Nullable="false" />
+    <Property Name="FECHA_INGRESO" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FECHA_VENCI" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="NOTAS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CATEGORIAS" Relationship="Self.FK_PRODUCTO_REFERENCE_CATEGORI" FromRole="PRODUCTOS" ToRole="CATEGORIAS" />
+    <NavigationProperty Name="DETALLES" Relationship="Self.FK_DETALLES_REFERENCE_PRODUCTO" FromRole="PRODUCTOS" ToRole="DETALLES" />
+    <NavigationProperty Name="PROVEEDORES" Relationship="Self.FK_PRODUCTO_REFERENCE_PROVEEDO" FromRole="PRODUCTOS" ToRole="PROVEEDORES" />
+    <NavigationProperty Name="SUCURSALES" Relationship="Self.FK_PRODUCTO_REFERENCE_SUCURSAL" FromRole="PRODUCTOS" ToRole="SUCURSALES" />
+  </EntityType>
+  <EntityType Name="PROVEEDORES">
+    <Key>
+      <PropertyRef Name="ID_PROVEEDOR" />
+    </Key>
+    <Property Name="ID_PROVEEDOR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PROVEEDOR" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="NOTAS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_PRODUCTO_REFERENCE_PROVEEDO" FromRole="PROVEEDORES" ToRole="PRODUCTOS" />
+  </EntityType>
+  <EntityType Name="ROLES">
+    <Key>
+      <PropertyRef Name="ID_ROL" />
+    </Key>
+    <Property Name="ID_ROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ROL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.FK_USUARIOS_REFERENCE_ROLES" FromRole="ROLES" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="SUCURSALES">
+    <Key>
+      <PropertyRef Name="ID_SUCURSAL" />
+    </Key>
+    <Property Name="ID_SUCURSAL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SUCURSAL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EMPLEADOS" Relationship="Self.FK_EMPLEADO_REFERENCE_SUCURSAL" FromRole="SUCURSALES" ToRole="EMPLEADOS" />
+    <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK_PRODUCTO_REFERENCE_SUCURSAL" FromRole="SUCURSALES" ToRole="PRODUCTOS" />
+  </EntityType>
+  <EntityType Name="USUARIOS">
+    <Key>
+      <PropertyRef Name="ID_USUARIOS" />
+    </Key>
+    <Property Name="ID_USUARIOS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_EMPLEADO" Type="Int32" />
+    <Property Name="ID_ROL" Type="Int32" />
+    <Property Name="USUARIO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CONTRASENIA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CONFIRMA_CONTRA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EMPLEADOS" Relationship="Self.FK_USUARIOS_REFERENCE_EMPLEADO" FromRole="USUARIOS" ToRole="EMPLEADOS" />
+    <NavigationProperty Name="ROLES" Relationship="Self.FK_USUARIOS_REFERENCE_ROLES" FromRole="USUARIOS" ToRole="ROLES" />
+  </EntityType>
+  <Association Name="FK_PRODUCTO_REFERENCE_CATEGORI">
+    <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="0..1" />
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIAS">
+        <PropertyRef Name="ID_CATEGORIA" />
+      </Principal>
+      <Dependent Role="PRODUCTOS">
+        <PropertyRef Name="ID_CATEGORIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ENC_FACT_REFERENCE_CLIENTES">
+    <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="0..1" />
+    <End Role="ENC_FACTURAS" Type="Self.ENC_FACTURAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTES">
+        <PropertyRef Name="ID_CLIENTES" />
+      </Principal>
+      <Dependent Role="ENC_FACTURAS">
+        <PropertyRef Name="ID_CLIENTES" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLES_REFERENCE_ENC_FACT">
+    <End Role="ENC_FACTURAS" Type="Self.ENC_FACTURAS" Multiplicity="0..1" />
+    <End Role="DETALLES" Type="Self.DETALLES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ENC_FACTURAS">
+        <PropertyRef Name="ID_ENCABEZADO" />
+      </Principal>
+      <Dependent Role="DETALLES">
+        <PropertyRef Name="ID_ENCABEZADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DETALLES_REFERENCE_PRODUCTO">
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="0..1" />
+    <End Role="DETALLES" Type="Self.DETALLES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTOS">
+        <PropertyRef Name="ID_PRODUCTO" />
+      </Principal>
+      <Dependent Role="DETALLES">
+        <PropertyRef Name="ID_PRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EMPLEADO_REFERENCE_SUCURSAL">
+    <End Role="SUCURSALES" Type="Self.SUCURSALES" Multiplicity="0..1" />
+    <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUCURSALES">
+        <PropertyRef Name="ID_SUCURSAL" />
+      </Principal>
+      <Dependent Role="EMPLEADOS">
+        <PropertyRef Name="ID_SUCURSAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USUARIOS_REFERENCE_EMPLEADO">
+    <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="0..1" />
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLEADOS">
+        <PropertyRef Name="ID_EMPLEADO" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="ID_EMPLEADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTO_REFERENCE_PROVEEDO">
+    <End Role="PROVEEDORES" Type="Self.PROVEEDORES" Multiplicity="0..1" />
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDORES">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="PRODUCTOS">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTO_REFERENCE_SUCURSAL">
+    <End Role="SUCURSALES" Type="Self.SUCURSALES" Multiplicity="0..1" />
+    <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUCURSALES">
+        <PropertyRef Name="ID_SUCURSAL" />
+      </Principal>
+      <Dependent Role="PRODUCTOS">
+        <PropertyRef Name="ID_SUCURSAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USUARIOS_REFERENCE_ROLES">
+    <End Role="ROLES" Type="Self.ROLES" Multiplicity="0..1" />
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ROLES">
+        <PropertyRef Name="ID_ROL" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="ID_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CATEGORIAS" EntityType="Self.CATEGORIAS" />
+    <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" />
+    <EntitySet Name="DETALLES" EntityType="Self.DETALLES" />
+    <EntitySet Name="EMPLEADOS" EntityType="Self.EMPLEADOS" />
+    <EntitySet Name="ENC_FACTURAS" EntityType="Self.ENC_FACTURAS" />
+    <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" />
+    <EntitySet Name="PROVEEDORES" EntityType="Self.PROVEEDORES" />
+    <EntitySet Name="ROLES" EntityType="Self.ROLES" />
+    <EntitySet Name="SUCURSALES" EntityType="Self.SUCURSALES" />
+    <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+    <AssociationSet Name="FK_PRODUCTO_REFERENCE_CATEGORI" Association="Self.FK_PRODUCTO_REFERENCE_CATEGORI">
+      <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ENC_FACT_REFERENCE_CLIENTES" Association="Self.FK_ENC_FACT_REFERENCE_CLIENTES">
+      <End Role="CLIENTES" EntitySet="CLIENTES" />
+      <End Role="ENC_FACTURAS" EntitySet="ENC_FACTURAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLES_REFERENCE_ENC_FACT" Association="Self.FK_DETALLES_REFERENCE_ENC_FACT">
+      <End Role="ENC_FACTURAS" EntitySet="ENC_FACTURAS" />
+      <End Role="DETALLES" EntitySet="DETALLES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DETALLES_REFERENCE_PRODUCTO" Association="Self.FK_DETALLES_REFERENCE_PRODUCTO">
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+      <End Role="DETALLES" EntitySet="DETALLES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EMPLEADO_REFERENCE_SUCURSAL" Association="Self.FK_EMPLEADO_REFERENCE_SUCURSAL">
+      <End Role="SUCURSALES" EntitySet="SUCURSALES" />
+      <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIOS_REFERENCE_EMPLEADO" Association="Self.FK_USUARIOS_REFERENCE_EMPLEADO">
+      <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTO_REFERENCE_PROVEEDO" Association="Self.FK_PRODUCTO_REFERENCE_PROVEEDO">
+      <End Role="PROVEEDORES" EntitySet="PROVEEDORES" />
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTO_REFERENCE_SUCURSAL" Association="Self.FK_PRODUCTO_REFERENCE_SUCURSAL">
+      <End Role="SUCURSALES" EntitySet="SUCURSALES" />
+      <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIOS_REFERENCE_ROLES" Association="Self.FK_USUARIOS_REFERENCE_ROLES">
+      <End Role="ROLES" EntitySet="ROLES" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

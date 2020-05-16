@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="318af7127a524580b7c90597824af01b" Name="Diagram1">
+        <EntityTypeShape EntityType="MediCenterModel.CATEGORIAS" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediCenterModel.CLIENTES" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediCenterModel.DETALLES" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediCenterModel.EMPLEADOS" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediCenterModel.ENC_FACTURAS" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediCenterModel.PRODUCTOS" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediCenterModel.PROVEEDORES" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediCenterModel.ROLES" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediCenterModel.SUCURSALES" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediCenterModel.USUARIOS" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <AssociationConnector Association="MediCenterModel.FK_PRODUCTO_REFERENCE_CATEGORI" ManuallyRouted="false" />
+        <AssociationConnector Association="MediCenterModel.FK_ENC_FACT_REFERENCE_CLIENTES" ManuallyRouted="false" />
+        <AssociationConnector Association="MediCenterModel.FK_DETALLES_REFERENCE_ENC_FACT" ManuallyRouted="false" />
+        <AssociationConnector Association="MediCenterModel.FK_DETALLES_REFERENCE_PRODUCTO" ManuallyRouted="false" />
+        <AssociationConnector Association="MediCenterModel.FK_EMPLEADO_REFERENCE_SUCURSAL" ManuallyRouted="false" />
+        <AssociationConnector Association="MediCenterModel.FK_USUARIOS_REFERENCE_EMPLEADO" ManuallyRouted="false" />
+        <AssociationConnector Association="MediCenterModel.FK_PRODUCTO_REFERENCE_PROVEEDO" ManuallyRouted="false" />
+        <AssociationConnector Association="MediCenterModel.FK_PRODUCTO_REFERENCE_SUCURSAL" ManuallyRouted="false" />
+        <AssociationConnector Association="MediCenterModel.FK_USUARIOS_REFERENCE_ROLES" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

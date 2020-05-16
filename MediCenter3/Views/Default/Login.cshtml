@@ -1,0 +1,74 @@
+﻿@model MediCenter3.Models.USUARIOS
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/MASTER.cshtml";
+}
+
+@using (Html.BeginForm("Login", "Default", FormMethod.Post))
+{
+<fieldset>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @*<legend class="text-center">Inicio de sesion para Medi Center</legend>*@
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @if (@ViewBag.Message != null)
+    {
+        <div style="border: 1px solid red">
+            @ViewBag.Message
+        </div>
+    }
+
+
+
+
+    <div class="form-wrapper">
+        @*<img src="https://i.ibb.co/12nDjWB/user.png" class="user">
+            <h2>Login</h2>*@
+        <form>
+            <img src="~/img/Captura.PNG" />
+            <label>@Html.LabelFor(a => a.USUARIO)</label>
+            @Html.TextBoxFor(a => a.USUARIO)
+            @Html.ValidationMessageFor(a => a.USUARIO)
+
+            @Html.LabelFor(a => a.CONTRASENIA, "CONTRASEÑA")
+
+            @Html.PasswordFor(a => a.CONTRASENIA)
+            @Html.ValidationMessageFor(a => a.CONTRASENIA)
+
+            <input type="submit" value="Ingresar" class="btn btn-success" />
+
+            <label>
+                Este sistema ha sido desarrollado para la
+                administracion del sistema de venta de medicamentos
+                OnLine, cumpliendo con el proyecto de la materia
+                Programacion II del ciclo 01-2020
+            </label>
+        </form>
+    </div>
+    
+
+    @*<table>
+            <tr>
+                <td>@Html.LabelFor(a => a.USUARIO)</td>
+                <td>@Html.TextBoxFor(a => a.USUARIO)</td>
+                <td>@Html.ValidationMessageFor(a => a.USUARIO)</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.CONTRASENIA, "CONTRASEÑA")
+                </td>
+                <td>@Html.PasswordFor(a => a.CONTRASENIA)</td>
+                <td> @Html.ValidationMessageFor(a => a.CONTRASENIA)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Login" class="btn btn-success" />
+                </td>
+                <td></td>
+            </tr>
+        </table>*@
+
+</fieldset>
+}

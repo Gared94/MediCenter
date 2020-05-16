@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MediCenter3.Models.PRODUCTOS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    @Html.ActionLink("Nuevo producto", "Create", "PRODUCTOS", new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRECIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EXISTENCIA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_INGRESO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHA_VENCI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOTAS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CATEGORIAS.CATEGORIA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PROVEEDORES.PROVEEDOR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SUCURSALES.SUCURSAL)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRECIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EXISTENCIA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA_INGRESO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA_VENCI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOTAS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CATEGORIAS.CATEGORIA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PROVEEDORES.PROVEEDOR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SUCURSALES.SUCURSAL)
+        </td>
+        <td>
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit","PRODUCTOS", new { id = item.ID_PRODUCTO  })'">Editar</button>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_PRODUCTO }) |*@
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Details","PRODUCTOS", new { id = item.ID_PRODUCTO })'">Detalles</button>
+            @*@Html.ActionLink("Details", "Details", new { id = item.ID_PRODUCTO }) |*@
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Delete","PRODUCTOS", new { id = item.ID_PRODUCTO })'">Borrar</button>
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_PRODUCTO })*@
+        </td>
+    </tr>
+}
+
+</table>

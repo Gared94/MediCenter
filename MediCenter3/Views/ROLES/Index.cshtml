@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MediCenter3.Models.ROLES>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    @Html.ActionLink("Nuevo rol", "Create", "SUCURSAL", new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ROL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ROL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPCION)
+        </td>
+        <td>
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit","ROLES", new { id = item.ID_ROL })'">Editar</button>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_ROL }) |*@
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Details","ROLES", new { id = item.ID_ROL })'">Detalles</button>
+            @*@Html.ActionLink("Details", "Details", new { id = item.ID_ROL }) |*@
+            <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Delete","ROLES", new { id = item.ID_ROL  })'">Borrar</button>
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_ROL })*@
+        </td>
+    </tr>
+}
+
+</table>
